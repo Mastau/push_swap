@@ -1,0 +1,11 @@
+Push_swap:
+
+Parsing :
+STRJOIN into FT_Split
+Parse correctement si multi AC ou "1 2 3"
+> Toujours un char * split en char **
+> Transfert de Split ** en LstNew ->content split[i]
+
+
+Algo : Radix sort ?
+Wiki Radix : https://fr.wikipedia.org/wiki/Tri_par_base#:~:text=En%20algorithmique%20le%20tri%20par,trie%20selon%20l'ordre%20lexicographique.
