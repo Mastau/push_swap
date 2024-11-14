@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   parsing.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 15:30:34 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/14 14:11:21 by thomarna         ###   ########.fr       */
+/*   Created: 2024/11/14 14:06:55 by thomarna          #+#    #+#             */
+/*   Updated: 2024/11/14 14:08:41 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-#include "parsing.h"
+#ifndef PARSING_H
+# define PARSING_H
 
-int	main(int ac, char **av)
-{
-	//t_list stack_a;
+#include "libft.h"
 
-	if (ac < 2)
-		return (0);
-	ft_printf("%s", av[1]);
-	//stack_a = parsing(av);
-	return (0);
-}
+t_list	parsing(char **av);
+
+#endif

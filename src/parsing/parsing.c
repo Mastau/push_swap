@@ -6,11 +6,11 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:45:28 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/13 15:56:36 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/14 14:12:51 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "parsing.h"
 
 t_list	verif_arg(char **av)
 {
@@ -19,10 +19,10 @@ t_list	verif_arg(char **av)
 	int	i;
 
 	head = NULL;
-	split = ft_split(ft_strjoin(av, ' '), ' ');
+	split = ft_split(ft_strjoin(*av, ' '), ' ');
 	while (split[i])
 	{
-		lst_addback(head, lst_new(split[i]));
+		ft_lst_addback(head, ft_lst_new(split[i]));
 		i++;
 	}
 	return (head);
