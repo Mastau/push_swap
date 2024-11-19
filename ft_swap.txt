@@ -8,4 +8,13 @@ Parse correctement si multi AC ou "1 2 3"
 
 
 Algo : Radix sort ?
-Wiki Radix : https://fr.wikipedia.org/wiki/Tri_par_base#:~:text=En%20algorithmique%20le%20tri%20par,trie%20selon%20l'ordre%20lexicographique.
+Wiki Radix : https://fr.wikipedia.org/wiki/Tri_par_base#:~:text=En%20algorithmique%20le%20tri%20par,trie%20selon%20l'ordre%20lexicographique.\
+
+Dicotomic Sort ?
+
+
+
+
+TODO
+ Creation Stack a et b
+ une ptite struct head pour stocker head_a, head_b
