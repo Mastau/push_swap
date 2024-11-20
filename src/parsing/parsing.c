@@ -6,14 +6,14 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:45:28 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/19 17:11:51 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/20 18:33:15 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "parsing.h"
+#include "push_swap.h"
 
-int	safe_atoi(char *nptr, int *res)
+static int	safe_atoi(char *nptr, int *res)
 {
 	int	sign;
 	int	nb;
@@ -39,7 +39,7 @@ int	safe_atoi(char *nptr, int *res)
 	return (0);
 }
 
-int	check_dup(char **str)
+static int	check_dup(char **str)
 {
 	int	i;
 	int	j;
@@ -59,7 +59,7 @@ int	check_dup(char **str)
 	return (0);
 }
 
-char	*ft_sanitize(char **av)
+static char	*ft_sanitize(char **av)
 {
 	char	**start;
 
@@ -75,6 +75,7 @@ char	*ft_sanitize(char **av)
 t_list	*parsing(char **av)
 {
 	t_list	*node;
+	t_list	*head;
 	char	**split;
 
 	node = NULL;
@@ -86,12 +87,46 @@ t_list	*parsing(char **av)
 		ft_lstadd_back(&node, ft_lstnew(*split));
 		split++;
 	}
+	head = node;
 	while (node)
 	{
 		if (safe_atoi(node->content, (int *)&node->content))
 			return (NULL);	
-		ft_printf("%d\n", node->content);
 		node = node->next;
 	}
-	return (node);
+	return (head);
+}
+
+static	int	*fill_stack(t_list *node, int *stack, int size)
+{
+	size--;
+	while (size >= 0)
+	{
+		stack[size] = (size_t)node->content;
+		node = node->next;
+		size--;
+	}
+	return (stack);
+}
+
+t_stack *init_stack(char **strs)
+{
+	t_list *node;
+	t_stack *stack;
+
+	stack = NULL;
+	node = parsing(strs);
+	if (node == NULL)
+	{
+		ft_dprintf(2, "%s\n", "Error");
+		return (NULL);
+	}
+	stack = stack_new(ft_lstsize(node));
+	if (stack->stack_a == NULL || stack->stack_b == NULL)
+	{
+		ft_dprintf(2, "%s\n", "Error");
+		return (NULL);
+	}
+	stack->stack_a = fill_stack(node, stack->stack_a, stack->size_a);
+	return (stack);
 }

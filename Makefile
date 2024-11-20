@@ -7,6 +7,8 @@ OBJS = $(SRCS:%.c=$(DIROBJS)/%.o)
 HEADER = -I lib/libft -I includes/
 SRCS = src/push_swap.c \
 	   src/parsing/parsing.c \
+	   src/stack.c \
+	   src/algo/dichotomic.c \
 
 all: $(NAME)
 
