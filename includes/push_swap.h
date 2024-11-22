@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:30:49 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/20 17:29:37 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:48:09 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,4 +31,5 @@ void	push(t_stack *stack, char name);
 void	rotate(t_stack *stack, char name);
 void	rrotate(t_stack *stack, char name);
 void	sort_stack(t_stack *stack);
+void ft_printstack(t_stack *stack);
 #endif

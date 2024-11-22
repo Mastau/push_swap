@@ -60,3 +60,5 @@ dkms.conf
 .cache/
 compile_commands.json
 push_swap
+visualizer-push-swap/
+debug/

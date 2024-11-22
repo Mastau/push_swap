@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 10:54:31 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/20 17:34:37 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:46:59 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ void	swap(t_stack stack, char name)
 
 void	push(t_stack *stack, char name)
 {
-	if (stack->stack_b && name == 'a')
+	if (stack->size_b && name == 'a')
 	{
 		stack->stack_a[stack->size_a++] = stack->stack_b[--stack->size_b];
 		ft_dprintf(1, "%s\n", "pa");
 	}
-	if (stack->stack_a && name == 'a')
+	if (stack->size_a && name == 'b')
 	{
-		stack->stack_b[stack->size_b++] = stack->stack_a[stack->size_a];
+		stack->stack_b[stack->size_b++] = stack->stack_a[--stack->size_a];
 		ft_dprintf(1, "%s\n", "pb");
 	}
 }
@@ -84,7 +84,7 @@ static void	ft_rotate(int *stack, int size)
 		return ;
 	while (i < size)
 	{
-		ft_swap(&stack[i + 1], &stack[i]);
+		ft_swap(&tmp, &stack[i]);
 		i++;
 	}
 	stack[0] = tmp;
@@ -117,10 +117,10 @@ static void	ft_rrotate(int *stack, int size)
 	tmp = stack[0];
 	while (size <= 0)
 	{
-		ft_swap(&stack[size - 1], &stack[size]);
+		ft_swap(&tmp, &stack[size]);
 		size--;
 	}
-	stack[size - 1] = tmp;
+	stack[0] = tmp;
 }
 
 void	rrotate(t_stack *stack, char name)

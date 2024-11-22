@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:30:34 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/20 17:30:28 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/22 11:48:51 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int	main(int ac, char **av)
 	}
 	stack = init_stack(av);
 	sort_stack(stack);
+	ft_printstack(stack);
 	return (0);
 }

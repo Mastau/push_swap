@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:43:48 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/21 16:47:46 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/22 12:27:07 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static	float	get_median(int	*stack, int size)
 	list = malloc(size * sizeof(int));
 	if (list == NULL)
 		return (0);
-	ft_memcpy(list, stack, size);
+	ft_memcpy(list, stack, size * sizeof(int));
 	ft_bsort(list, size);
 	if (size % 2 == 0)
 		median = (float)(list[(size / 2) - 1] + list[(size + 1) / 2]) / 2.0;
@@ -65,26 +65,56 @@ static	float	get_median(int	*stack, int size)
 	return (median);
 }
 
+void ft_printstack(t_stack *stack)
+{
+	int	i;
+
+	i = 0;
+	if (stack->size_a)
+	{	
+		i = stack->size_a;
+		ft_printf("%s", "Stack a: ");
+		while (i > 0)
+		{
+			ft_printf(" %d ", stack->stack_a[i - 1]);
+			i--;
+		}
+		ft_printf("%c", '\n');
+	}
+	else 
+		ft_printf("%s\n", "Stack a: vide");
+	if (stack->size_b)
+	{	
+		i = stack->size_b;
+		ft_printf("%s", "Stack b: ");
+		while (i > 0)
+		{
+			ft_printf(" %d ", stack->stack_b[i - 1]);
+			i--;
+		}
+		ft_printf("%c", '\n');
+	}
+	else 
+		ft_printf("%s\n", "Stack b: vide");
+}
+
 void	sort_stack(t_stack *stack)
 {
 	float median;
-	int	initial_size;
 
 	median = 0;
-	initial_size = stack->size_a;
 	if (check_sort(stack->stack_a, stack->size_a))
 		return ;
 	median = get_median(stack->stack_a, stack->size_a);
 	while (stack->size_a > 0)
 	{
 		if (stack->stack_a[stack->size_a - 1] <= median)
-			push(stack, 'a');
+			push(stack, 'b');
 		else
 			rotate(stack, 'a');
-		if (check_sort(stack->stack_a, initial_size))
-			break;
-	}
+	}	
 	sort_stack(stack);
 	while (stack->size_b > 0)
-		push(stack, 'b');
+		push(stack, 'a');
+	ft_printstack(stack);
 }
