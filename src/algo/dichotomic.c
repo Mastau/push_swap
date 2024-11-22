@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:43:48 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/20 18:59:47 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/21 16:47:46 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 
 static	int	check_sort(int	*stack, int size)
 {
-	while (size > 0)
+	int	i;
+
+	i = 0;
+	while (size > i)
 	{
-		if (stack[size] < stack[size - 1])
+		if (stack[i] < stack[i - 1])
 			return (0);
-		size--;
+		i++;
 	}
 	return (1);
 }
@@ -55,9 +58,9 @@ static	float	get_median(int	*stack, int size)
 	ft_memcpy(list, stack, size);
 	ft_bsort(list, size);
 	if (size % 2 == 0)
-		median = (float)(list[size / 2] + list[(size + 1) / 2]) / 2.0;
+		median = (float)(list[(size / 2) - 1] + list[(size + 1) / 2]) / 2.0;
 	else
-		median = list[(size + 1) / 2];
+		median = list[size / 2];
 	free(list);
 	return (median);
 }
@@ -65,8 +68,10 @@ static	float	get_median(int	*stack, int size)
 void	sort_stack(t_stack *stack)
 {
 	float median;
+	int	initial_size;
 
 	median = 0;
+	initial_size = stack->size_a;
 	if (check_sort(stack->stack_a, stack->size_a))
 		return ;
 	median = get_median(stack->stack_a, stack->size_a);
@@ -76,6 +81,8 @@ void	sort_stack(t_stack *stack)
 			push(stack, 'a');
 		else
 			rotate(stack, 'a');
+		if (check_sort(stack->stack_a, initial_size))
+			break;
 	}
 	sort_stack(stack);
 	while (stack->size_b > 0)
