@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:45:28 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/20 18:33:15 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/22 18:25:47 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_list	*parsing(char **av)
 	char	**split;
 
 	node = NULL;
-	split = ft_split(ft_sanitize(av), ' ');
+	split = ft_split(ft_revstr(ft_sanitize(av)), ' ');
 	if (check_dup(split))
 		return (NULL);
 	while (*split)

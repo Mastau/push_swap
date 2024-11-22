@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:43:48 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/22 12:27:07 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/22 17:58:24 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void ft_printstack(t_stack *stack)
 		ft_printf("%s\n", "Stack b: vide");
 }
 
-void	sort_stack(t_stack *stack)
+void	big_sort_stack(t_stack *stack)
 {
 	float median;
 

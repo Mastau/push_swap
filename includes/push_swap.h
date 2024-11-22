@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:30:49 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/22 11:48:09 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:17:43 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@ typedef struct s_stack
 t_list	*parsing(char **av);
 t_stack	*stack_new(unsigned int size);
 t_stack	*init_stack(char **strs);
-void	swap(t_stack stack, char name);
+void	swap(t_stack *stack, char name);
 void	push(t_stack *stack, char name);
 void	rotate(t_stack *stack, char name);
 void	rrotate(t_stack *stack, char name);
+void	small_sort_stack(t_stack *stack);
+void	big_sort_stack(t_stack *stack);
 void	sort_stack(t_stack *stack);
 void ft_printstack(t_stack *stack);
 #endif

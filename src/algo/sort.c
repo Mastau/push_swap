@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/13 15:30:34 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/22 15:22:04 by thomarna         ###   ########.fr       */
+/*   Created: 2024/11/22 15:19:39 by thomarna          #+#    #+#             */
+/*   Updated: 2024/11/22 16:29:29 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft.h"
 
-int	main(int ac, char **av)
+void	sort_stack(t_stack *stack)
 {
-	t_stack	*stack;
-	
-	stack = NULL;
-	if (ac < 2)
-	{
-		ft_dprintf(2, "%s\n", "Error");
-		return (0);
-	}
-	stack = init_stack(av);
-	sort_stack(stack);
-	return (0);
+	if (stack->size_a <= 5)
+		small_sort_stack(stack);
+	else
+		big_sort_stack(stack);
+	//ft_printstack(stack);
 }

@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 10:54:31 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/22 11:46:59 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/22 15:21:53 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,34 +26,34 @@ t_stack	*stack_new(unsigned int size)
 	return (stack);
 }
 
-void	swap(t_stack stack, char name)
+void	swap(t_stack *stack, char name)
 {
 	if (name == 'a')
 	{
-		if (stack.size_a > 1)
+		if (stack->size_a > 1)
 		{
-			ft_swap(&stack.stack_a[stack.size_a - 1],
-				&stack.stack_a[stack.size_a - 2]);
+			ft_swap(&stack->stack_a[stack->size_a - 1],
+				&stack->stack_a[stack->size_a - 2]);
 			ft_dprintf(1, "%s\n", "sa");
 		}
 	}
 	else if (name == 'b')
 	{
-		if (stack.size_b > 1)
+		if (stack->size_b > 1)
 		{
-			ft_swap(&stack.stack_b[stack.size_b - 1],
-				&stack.stack_b[stack.size_b - 2]);
+			ft_swap(&stack->stack_b[stack->size_b - 1],
+				&stack->stack_b[stack->size_b - 2]);
 			ft_dprintf(1, "%s\n", "sb");
 		}
 	}
 	else if (name == 'c')
 	{
-		if (stack.size_b > 1)
+		if (stack->size_b > 1)
 		{
-			ft_swap(&stack.stack_a[stack.size_a - 1],
-				&stack.stack_a[stack.size_a - 2]);
-			ft_swap(&stack.stack_b[stack.size_b - 1],
-				&stack.stack_b[stack.size_b - 2]);
+			ft_swap(&stack->stack_a[stack->size_a - 1],
+				&stack->stack_a[stack->size_a - 2]);
+			ft_swap(&stack->stack_b[stack->size_b - 1],
+				&stack->stack_b[stack->size_b - 2]);
 			ft_dprintf(1, "%s\n", "ss");
 		}
 	}
