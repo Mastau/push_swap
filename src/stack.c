@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 10:54:31 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/22 15:21:53 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/23 16:49:04 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ t_stack	*stack_new(unsigned int size)
 	stack->stack_b = ft_calloc(size, sizeof(int));
 	stack->size_a = size;
 	stack->size_b = 0;
+	stack->median = size / 2;
+	stack->cost = 0;
+	stack->cheapest = 0;
 	return (stack);
 }
 
@@ -32,8 +35,7 @@ void	swap(t_stack *stack, char name)
 	{
 		if (stack->size_a > 1)
 		{
-			ft_swap(&stack->stack_a[stack->size_a - 1],
-				&stack->stack_a[stack->size_a - 2]);
+			ft_swap(&stack->stack_a[0], &stack->stack_a[1]);
 			ft_dprintf(1, "%s\n", "sa");
 		}
 	}
@@ -41,8 +43,7 @@ void	swap(t_stack *stack, char name)
 	{
 		if (stack->size_b > 1)
 		{
-			ft_swap(&stack->stack_b[stack->size_b - 1],
-				&stack->stack_b[stack->size_b - 2]);
+			ft_swap(&stack->stack_b[0], &stack->stack_b[1]);
 			ft_dprintf(1, "%s\n", "sb");
 		}
 	}
@@ -50,26 +51,10 @@ void	swap(t_stack *stack, char name)
 	{
 		if (stack->size_b > 1)
 		{
-			ft_swap(&stack->stack_a[stack->size_a - 1],
-				&stack->stack_a[stack->size_a - 2]);
-			ft_swap(&stack->stack_b[stack->size_b - 1],
-				&stack->stack_b[stack->size_b - 2]);
+			ft_swap(&stack->stack_a[0], &stack->stack_a[1]);
+			ft_swap(&stack->stack_b[0],	&stack->stack_b[1]);
 			ft_dprintf(1, "%s\n", "ss");
 		}
-	}
-}
-
-void	push(t_stack *stack, char name)
-{
-	if (stack->size_b && name == 'a')
-	{
-		stack->stack_a[stack->size_a++] = stack->stack_b[--stack->size_b];
-		ft_dprintf(1, "%s\n", "pa");
-	}
-	if (stack->size_a && name == 'b')
-	{
-		stack->stack_b[stack->size_b++] = stack->stack_a[--stack->size_a];
-		ft_dprintf(1, "%s\n", "pb");
 	}
 }
 
@@ -89,6 +74,25 @@ static void	ft_rotate(int *stack, int size)
 	}
 	stack[0] = tmp;
 }
+
+void	push(t_stack *stack, char name)
+{
+	if (stack->size_b && name == 'a')
+	{
+		stack->stack_a[stack->size_a++] = stack->stack_b[--stack->size_b];
+		ft_rotate(stack->stack_a, stack->size_a);
+		ft_dprintf(1, "%s\n", "pa");
+
+	}
+	if (stack->size_a && name == 'b')
+	{
+		stack->stack_b[stack->size_b++] = stack->stack_a[--stack->size_a];
+		ft_rotate(stack->stack_b, stack->size_b);
+		ft_dprintf(1, "%s\n", "pb");
+	}
+}
+
+
 
 void	rotate(t_stack *stack, char name)
 {
@@ -115,7 +119,10 @@ static void	ft_rrotate(int *stack, int size)
 	int	tmp;
 
 	tmp = stack[0];
-	while (size <= 0)
+	if (size <= 1)
+		return ;
+	size--;
+	while (size)
 	{
 		ft_swap(&tmp, &stack[size]);
 		size--;
@@ -140,5 +147,66 @@ void	rrotate(t_stack *stack, char name)
 		ft_rrotate(stack->stack_b, stack->size_b);
 		ft_rrotate(stack->stack_a, stack->size_a);
 		ft_dprintf(1, "%s\n", "rrr");
+	}
+}
+
+int	find_min(t_stack *stack)
+{
+	int	index;
+	int	value;
+	int	i;
+
+	index = 0;
+	value = 0;
+	i = 0;
+	if (stack->size_a == 0)
+		return (-1);
+	value = stack->stack_a[0];
+	while (i < stack->size_a)
+	{
+		if (stack->stack_a[i] < value)
+		{
+			value = stack->stack_a[i];
+			index = i;
+		}
+		i++;
+	}
+	return (index);
+}
+
+void	move_to_b(t_stack *stack, int index)
+{
+	while (index > 0)
+	{
+		rotate(stack, 'a');
+		index--;
+	}
+	push(stack, 'b');
+}
+
+void	move_to_a(t_stack *stack)
+{
+	int	value;
+	int	target;
+
+	value = stack->stack_b[stack->size_b - 1];
+	target = find_target(stack, value) ;
+	while (target > 0)
+	{
+		rotate(stack, 'a');
+		target--;
+	}
+	push(stack, 'a');
+}
+
+void	move_min(t_stack *stack)
+{
+	int index;
+
+	index = find_min(stack);
+	while (index > 0)
+	{
+		rotate(stack, 'a');
+		index--;
 	}
 }

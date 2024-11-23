@@ -6,12 +6,28 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:45:28 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/22 18:25:47 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/23 16:23:05 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
+
+int	*ft_revtab(int	*tab, int size)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < size / 2)
+	{
+		j = tab[i];
+		tab[i] = tab[size - i - 1];
+		tab[size - i - 1] = j;
+		i++;
+	}
+	return (tab);
+}
 
 static int	safe_atoi(char *nptr, int *res)
 {
@@ -79,7 +95,7 @@ t_list	*parsing(char **av)
 	char	**split;
 
 	node = NULL;
-	split = ft_split(ft_revstr(ft_sanitize(av)), ' ');
+	split = ft_split(ft_sanitize(av), ' ');
 	if (check_dup(split))
 		return (NULL);
 	while (*split)
@@ -99,12 +115,14 @@ t_list	*parsing(char **av)
 
 static	int	*fill_stack(t_list *node, int *stack, int size)
 {
-	size--;
-	while (size >= 0)
+	int	i;
+	
+	i = 0;
+	while (size > i)
 	{
-		stack[size] = (size_t)node->content;
+		stack[i] = (size_t)node->content;
 		node = node->next;
-		size--;
+		i++;
 	}
 	return (stack);
 }
@@ -128,5 +146,6 @@ t_stack *init_stack(char **strs)
 		return (NULL);
 	}
 	stack->stack_a = fill_stack(node, stack->stack_a, stack->size_a);
+	ft_printstack(stack);
 	return (stack);
 }

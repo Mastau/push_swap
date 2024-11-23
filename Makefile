@@ -8,7 +8,7 @@ HEADER = -I lib/libft -I includes/
 SRCS = src/push_swap.c \
 	   src/parsing/parsing.c \
 	   src/stack.c \
-	   src/algo/dichotomic.c \
+	   src/algo/big_sort.c \
 	   src/algo/small_sort.c \
 	   src/algo/sort.c \
 

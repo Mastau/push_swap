@@ -18,3 +18,19 @@ Dicotomic Sort ?
 TODO
  Creation Stack a et b
  une ptite struct head pour stocker head_a, head_b
+ 
+ 
+ Turc:
+ 
+ Push 2 to b without check anything
+ 
+ 
+ 
+ 
+ 213 if 1 > sa
+312 rra
+231 ra
+321 sa ra
+132 sa rra
+ 
+123
