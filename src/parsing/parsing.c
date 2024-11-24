@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:45:28 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/24 13:12:30 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/24 13:57:38 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,17 @@ static char	*ft_sanitize(char **av)
 	return (*start);
 }
 
-t_list	*parsing(char **av)
+static	t_stack *fill_stack(t_stack *stack, t_list *head)
+{
+	while(head)
+	{
+		push(stack, (int)(long)head->content);
+		head = head->next;
+	}
+	return (stack);
+}
+
+t_stack	*parsing(t_stack *stack, char **av)
 {
 	t_list	*node;
 	t_list	*head;
@@ -94,7 +104,8 @@ t_list	*parsing(char **av)
 			return (NULL);	
 		node = node->next;
 	}
-	return (head);
+	stack = fill_stack(stack, head);
+	return (stack);
 }
 
 
