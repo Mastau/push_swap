@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 10:54:31 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/24 14:25:47 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/25 01:16:11 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,30 +22,30 @@ t_stack *init_stack(void)
     return (stack);
 }
 
-void push(t_stack *stack, int value) 
+void push(t_stack *stack, int *value) 
 {
     t_node *node;
 
-	node = malloc(sizeof(t_list));
+	node = malloc(sizeof(t_node));
     if (!node)
         return;
-    node->value = value;
+    node->value = value[0];
+	node->rank = value[1];
     node->next = stack->top;
     stack->top = node;
     stack->size++;
 }
 
-int pop(t_stack *stack)
+int *pop(t_stack *stack, int *value)
 {
 	t_node *tmp;
-	int	value;
 
 	tmp = NULL;
-	value = 0;
-    if (stack->size == 0)
-        return (-1);
+    if (stack->size == 0 || value == NULL)
+        return (NULL);
     tmp = stack->top;
-	value = tmp->value;
+	value[0] = tmp->value;
+	value[1] = tmp->rank;
     stack->top = stack->top->next;
     free(tmp);
     stack->size--;
@@ -77,17 +77,15 @@ void swap(t_stack *stack, char name)
 		ft_dprintf(1, "%s\n", "sa");
 	else
 		ft_dprintf(1, "%s\n", "sb");
-
 }
 
 void push_to(t_stack *src, t_stack *dest, char name)
 {
-	int	value;
+	int	value[2];
 
-	value = 0;
     if (src->size == 0)
         return ;
-    value = pop(src);
+    pop(src, value);
     push(dest, value);
 	if (name == 'a')
 		ft_dprintf(1, "%s\n", "pa");

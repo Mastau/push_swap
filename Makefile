@@ -21,6 +21,8 @@ $(DIROBJS)/%.o: %.c
 	$(CC) $(FLAGS) $(HEADER) $< -c -o $@
 $(LIBFT):
 	make -C lib/libft/ 
+
+	
 clean:
 	@rm -rf $(DIROBJS)
 fclean: clean

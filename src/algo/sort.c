@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:19:39 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/24 14:34:53 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/24 22:39:49 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,5 @@ void	sort_stack(t_stack *a, t_stack *b)
 		small_sort(a, b);
 	else
 		turk_sort(a, b);
+	//print_stack(a);
 }

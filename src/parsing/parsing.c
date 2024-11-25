@@ -6,23 +6,24 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:45:28 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/24 13:57:38 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/25 01:22:30 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
+#include <stdio.h>
 
-static int	safe_atoi(char *nptr, int *res)
+static int	safe_atol(char *nptr, long *res)
 {
-	int	sign;
-	int	nb;
+	long	sign;
+	long	nb;
 
 	sign = 1;
 	nb = 0;
 	while ((*nptr >= 9 && *nptr <= 13) || *nptr == ' ')
 		nptr++;
-	if (*nptr == '+' || *nptr == '-')
+	if (*nptr == '-' || *nptr == '+')
 	{
 		if (*nptr == '-')
 			sign = -sign;
@@ -72,40 +73,49 @@ static char	*ft_sanitize(char **av)
 	return (*start);
 }
 
-static	t_stack *fill_stack(t_stack *stack, t_list *head)
+int	is_limit(long nb)
 {
-	while(head)
+	if (nb > INT_MAX || nb < INT_MIN)
+		return (1);
+	return (0);
+}
+
+void	*ft_freeparsing(char **split, int *value)
+{
+	int	i;
+
+	i = 0;
+	while (split[i])
 	{
-		push(stack, (int)(long)head->content);
-		head = head->next;
+		free(split[i]);
+		i++;
 	}
-	return (stack);
+	free(split);
+	free(value);
+	return (NULL);
 }
 
 t_stack	*parsing(t_stack *stack, char **av)
 {
-	t_list	*node;
-	t_list	*head;
 	char	**split;
+	int	*value;
+	long	nb;
+	int	i;
 
-	node = NULL;
+	i = 0;
 	split = ft_split(ft_sanitize(av), ' ');
-	if (check_dup(split))
-		return (NULL);
-	while (*split)
+	value = malloc(sizeof(int) * 2);
+	if (check_dup(split) || split[0] == NULL || value == NULL)
+		return (ft_freeparsing(split, value));
+	while (split[i])
 	{
-		ft_lstadd_back(&node, ft_lstnew(*split));
-		split++;
+		if (safe_atol(*split, &nb) || is_limit(nb))
+			return (ft_freeparsing(split, value));
+		value[0] = (int)nb;
+		value[1] = 0;
+		push(stack, value);
+		i++;
 	}
-	head = node;
-	while (node)
-	{
-		if (safe_atoi(node->content, (int *)&node->content))
-			return (NULL);	
-		node = node->next;
-	}
-	stack = fill_stack(stack, head);
+	ft_freeparsing(split, value);
 	return (stack);
 }
-
-

@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 14:54:45 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/24 14:46:53 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/25 01:23:42 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ void	sort_three(t_stack *stack)
 	first = stack->top->value;
 	second = stack->top->next->value;
 	third = stack->top->next->next->value;
-	if (first < second && second < third)
-		return ;
 	if (first < third && third < second)
 	{
 		rrotate(stack, 'a');
@@ -32,15 +30,14 @@ void	sort_three(t_stack *stack)
 		swap(stack, 'a');
 	else if (third < first && first < second)
 	{
-		swap(stack, 'a');
 		rrotate(stack, 'a');
 	}
 	else if (second < third && third < first)
 		rotate(stack, 'a');
-	else if (third < second && second < first)
+	else if (third < second && second < first)//321
 	{
 		swap(stack, 'a');
-		rotate(stack, 'a');
+		rrotate(stack, 'a');
 	}
 }
 
