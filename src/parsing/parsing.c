@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:45:28 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/25 01:22:30 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:45:00 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int	is_limit(long nb)
 	return (0);
 }
 
-void	*ft_freeparsing(char **split, int *value)
+void	*ft_freeparsing(char **split)
 {
 	int	i;
 
@@ -91,31 +91,27 @@ void	*ft_freeparsing(char **split, int *value)
 		i++;
 	}
 	free(split);
-	free(value);
 	return (NULL);
 }
 
 t_stack	*parsing(t_stack *stack, char **av)
 {
 	char	**split;
-	int	*value;
 	long	nb;
 	int	i;
 
 	i = 0;
 	split = ft_split(ft_sanitize(av), ' ');
-	value = malloc(sizeof(int) * 2);
-	if (check_dup(split) || split[0] == NULL || value == NULL)
-		return (ft_freeparsing(split, value));
-	while (split[i])
+	if (check_dup(split) || split[0] == NULL)
+		return (ft_freeparsing(split));
+	i = ft_splitlen(split) - 1;
+	while (i >= 0)
 	{
-		if (safe_atol(*split, &nb) || is_limit(nb))
-			return (ft_freeparsing(split, value));
-		value[0] = (int)nb;
-		value[1] = 0;
-		push(stack, value);
-		i++;
+		if (safe_atol(split[i], &nb) || is_limit(nb))
+			return (ft_freeparsing(split));
+		push(stack, ft_nodenew((int)nb));
+		i--;
 	}
-	ft_freeparsing(split, value);
+	ft_freeparsing(split);
 	return (stack);
 }

@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:30:34 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/25 01:01:49 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:48:37 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void print_stack(t_stack *stack)
 	current = stack->top;
     while (current) 
 	{
-        ft_printf("%d ", current->rank);
+        ft_printf("value:%d, rank:%d | ", current->value, current->rank);
         current = current->next;
     }
     ft_printf("\n");
@@ -92,8 +92,9 @@ int	main(int ac, char **av)
 	}
 	fill_index(a);
 	ft_set_ranks(a, a->size + 1);
-	push_to_b(a, b);
-	//sort_stack(a, b);	
+	print_stack(a);
+	sort_stack(a, b);
+	print_stack(b);
 	return (0);
 }
 

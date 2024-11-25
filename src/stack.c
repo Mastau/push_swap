@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 10:54:31 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/25 01:16:11 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:10:32 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,34 +22,56 @@ t_stack *init_stack(void)
     return (stack);
 }
 
-void push(t_stack *stack, int *value) 
+t_node	*ft_nodedup(t_node stack)
 {
-    t_node *node;
+	t_node	*node;
 
-	node = malloc(sizeof(t_node));
-    if (!node)
-        return;
-    node->value = value[0];
-	node->rank = value[1];
-    node->next = stack->top;
-    stack->top = node;
-    stack->size++;
+	node = (t_node *) ft_calloc(1, sizeof(t_node));
+	if (node == NULL)
+		return (NULL);
+	node->value = stack.value;
+	node->index = stack.index;
+	node->target_pos = stack.target_pos;
+	node->rank = stack.rank;
+	node->cost_a = stack.cost_a;
+	node->cost_b = stack.cost_b;
+	node->next = NULL;
+	return (node);
 }
 
-int *pop(t_stack *stack, int *value)
+t_node *ft_nodenew(int	value)
+{
+	t_node *node;
+	 
+	node = (t_node *) ft_calloc(1, sizeof(t_node));
+	if (node == NULL)
+		return (NULL);
+	node->value = value;
+	node->target_pos = -1;
+	node->cost_a= -1;
+	node->cost_b = -1;
+	return (node);
+}
+
+void push(t_stack *stack, t_node *node) 
+{
+	node->next = stack->top;
+	stack->top = node;
+	stack->size++;
+}
+
+void	pop(t_stack *stack)
 {
 	t_node *tmp;
 
 	tmp = NULL;
-    if (stack->size == 0 || value == NULL)
-        return (NULL);
+    if (stack->size == 0)
+        return ;
     tmp = stack->top;
-	value[0] = tmp->value;
-	value[1] = tmp->rank;
     stack->top = stack->top->next;
     free(tmp);
     stack->size--;
-    return (value);
+    return ;
 }
 
 int top(t_stack *stack)
@@ -81,12 +103,10 @@ void swap(t_stack *stack, char name)
 
 void push_to(t_stack *src, t_stack *dest, char name)
 {
-	int	value[2];
-
     if (src->size == 0)
         return ;
-    pop(src, value);
-    push(dest, value);
+    push(dest, ft_nodedup(*(src->top)));
+	pop(src);
 	if (name == 'a')
 		ft_dprintf(1, "%s\n", "pa");
 	else
@@ -113,7 +133,7 @@ void rotate(t_stack *stack, char name)
     first->next = NULL;
 	if (name == 'a')
 		ft_dprintf(1, "%s\n", "ra");
-	else
+	else if (name == 'b')
 		ft_dprintf(1, "%s\n", "rb");
 }
 
@@ -135,6 +155,6 @@ void rrotate(t_stack *stack, char name) {
     prev->next = NULL;
 	if (name == 'a')
 		ft_dprintf(1, "%s\n", "rra");
-	else
+	else if (name == 'b')
 		ft_dprintf(1, "%s\n", "rrb");
 }
