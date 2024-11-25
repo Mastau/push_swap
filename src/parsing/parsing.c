@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:45:28 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/25 13:45:00 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:42:35 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ t_stack	*parsing(t_stack *stack, char **av)
 {
 	char	**split;
 	long	nb;
-	int	i;
+	int		i;
 
 	i = 0;
 	split = ft_split(ft_sanitize(av), ' ');

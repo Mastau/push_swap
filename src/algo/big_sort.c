@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/20 13:43:48 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/25 18:12:07 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:43:44 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ static int	ft_get_target(t_stack *a, int stack_b_rank, int closest_rank,
 	}
 	return (target_pos);
 }
+
 void	ft_set_pos(t_stack *stack)
 {
 	t_node	*current;
@@ -96,6 +97,7 @@ void	ft_set_pos(t_stack *stack)
 		current = current->next;
 	}
 }
+
 void	ft_set_target_pos(t_stack *a, t_stack *b)
 {
 	t_node	*current;
@@ -129,6 +131,7 @@ static void	ft_get_cost(t_stack *a, t_stack *b)
 		crt_b = crt_b->next;
 	}
 }
+
 void	push_to_b(t_stack *a, t_stack *b)
 {
 	int	nb_push;
@@ -152,7 +155,6 @@ void	push_to_b(t_stack *a, t_stack *b)
 		push_to(a, b, 'b');
 	sort_three(a);
 }
-
 
 void	perform_move(t_stack *a, t_stack *b, t_node *node)
 {
@@ -182,7 +184,7 @@ void	perform_move(t_stack *a, t_stack *b, t_node *node)
 void	move_cheapest(t_stack *a, t_stack *b)
 {
 	t_node	*current;
-	t_node	*cheapest;	
+	t_node	*cheapest;
 	int		cheapest_cost;
 	int		total_cost;
 
@@ -199,7 +201,7 @@ void	move_cheapest(t_stack *a, t_stack *b)
 		}
 		current = current->next;
 	}
-	if(cheapest)
+	if (cheapest)
 		perform_move(a, b, cheapest);
 }
 
