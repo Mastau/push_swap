@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:30:49 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/26 13:31:30 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:00:47 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,6 @@ void				ft_set_pos(t_stack *stack);
 void				ft_set_target_pos(t_stack *a, t_stack *b);
 void				ft_get_cost(t_stack *a, t_stack *b);
 void				move_cheapest(t_stack *a, t_stack *b);
+int					clear_all_stack(t_stack *a, t_stack *b);
+void				clear_stack(t_stack *stack);
 #endif

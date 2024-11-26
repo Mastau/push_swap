@@ -6,6 +6,7 @@ DIROBJS = .objs
 OBJS = $(SRCS:%.c=$(DIROBJS)/%.o)
 HEADER = -I lib/libft -I includes/
 SRCS = src/push_swap.c \
+	   src/clear_stack.c \
 	   src/parsing/parsing_utils.c \
 	   src/parsing/parsing.c \
 	   src/algo/big_sort_utils.c \

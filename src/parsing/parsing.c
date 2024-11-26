@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:45:28 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/26 13:21:10 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:02:12 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,12 +89,18 @@ t_stack	*parsing(t_stack *stack, char **av)
 	i = 0;
 	split = ft_split(ft_sanitize(av), ' ');
 	if (check_dup(split) || split[0] == NULL)
+	{
+		clear_stack(stack);
 		return (ft_freeparsing(split));
+	}
 	i = ft_splitlen(split) - 1;
 	while (i >= 0)
 	{
 		if (safe_atol(split[i], &nb) || is_limit(nb))
+		{
+			clear_stack(stack);
 			return (ft_freeparsing(split));
+		}
 		push(stack, ft_nodenew((int)nb));
 		i--;
 	}

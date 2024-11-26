@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:30:34 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/25 18:43:18 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/26 14:04:43 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static void	ft_set_ranks(t_stack *a, int size)
 	}
 }
 
-void	fill_index(t_stack *stack)
+static void	fill_index(t_stack *stack)
 {
 	int		i;
 	t_node	*current;
@@ -70,7 +70,7 @@ void	fill_index(t_stack *stack)
 	}
 }
 
-int	ft_is_sorted(t_node *stack)
+static int	ft_is_sorted(t_node *stack)
 {
 	t_node	*current;
 
@@ -98,13 +98,14 @@ int	main(int ac, char **av)
 	a = parsing(a, av);
 	if (a == NULL)
 	{
+		clear_stack(b);
 		ft_dprintf(2, "%s\n", "Error");
 		return (0);
 	}
 	if (ft_is_sorted(a->top))
-		return (0);
+		return (clear_all_stack(a, b));
 	fill_index(a);
 	ft_set_ranks(a, a->size + 1);
 	sort_stack(a, b);
-	return (0);
+	return (clear_all_stack(a, b));
 }
