@@ -6,7 +6,7 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:30:49 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/25 17:40:10 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:31:30 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_stack
 
 }					t_stack;
 
+char				*ft_sanitize(char **av);
 t_stack				*parsing(t_stack *stack, char **av);
 t_stack				*init_stack(void);
 void				push(t_stack *stack, t_node *node);
@@ -52,4 +53,11 @@ void				sort_stack(t_stack *a, t_stack *b);
 void				sort_three(t_stack *stack);
 void				push_to_b(t_stack *a, t_stack *b);
 t_node				*ft_nodenew(int value);
+t_node				*ft_nodedup(t_node stack);
+int					ft_get_target(t_stack *a, int stack_b_rank,
+						int closest_rank, int target_pos);
+void				ft_set_pos(t_stack *stack);
+void				ft_set_target_pos(t_stack *a, t_stack *b);
+void				ft_get_cost(t_stack *a, t_stack *b);
+void				move_cheapest(t_stack *a, t_stack *b);
 #endif

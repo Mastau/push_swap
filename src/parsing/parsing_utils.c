@@ -1,38 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   big_sort.c                                         :+:      :+:    :+:   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 13:43:48 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/26 13:32:16 by thomarna         ###   ########.fr       */
+/*   Created: 2024/11/26 13:21:12 by thomarna          #+#    #+#             */
+/*   Updated: 2024/11/26 13:21:24 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static	void	align_stack(t_stack *stack)
+char	*ft_sanitize(char **av)
 {
-	int	min_pos;
+	char	**start;
 
-	min_pos = find_position(stack, find_min(stack));
-	if (min_pos <= stack->size / 2)
-		while (min_pos--)
-			rotate(stack, 'a');
-	else
-		while (min_pos++ < stack->size)
-			rrotate(stack, 'a');
-}
-
-void	turk_sort(t_stack *a, t_stack *b)
-{
-	push_to_b(a, b);
-	while (b->size > 0)
+	start = ++av;
+	while (*(av + 1))
 	{
-		ft_set_target_pos(a, b);
-		ft_get_cost(a, b);
-		move_cheapest(a, b);
+		(*av)[ft_strlen(*av)] = ' ';
+		av++;
 	}
-	align_stack(a);
+	return (*start);
 }

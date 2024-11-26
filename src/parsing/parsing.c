@@ -6,13 +6,12 @@
 /*   By: thomarna <thomarna@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 15:45:28 by thomarna          #+#    #+#             */
-/*   Updated: 2024/11/25 18:42:35 by thomarna         ###   ########.fr       */
+/*   Updated: 2024/11/26 13:21:10 by thomarna         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "push_swap.h"
-#include <stdio.h>
 
 static int	safe_atol(char *nptr, long *res)
 {
@@ -60,27 +59,14 @@ static int	check_dup(char **str)
 	return (0);
 }
 
-static char	*ft_sanitize(char **av)
-{
-	char	**start;
-
-	start = ++av;
-	while (*(av + 1))
-	{
-		(*av)[ft_strlen(*av)] = ' ';
-		av++;
-	}
-	return (*start);
-}
-
-int	is_limit(long nb)
+static int	is_limit(long nb)
 {
 	if (nb > INT_MAX || nb < INT_MIN)
 		return (1);
 	return (0);
 }
 
-void	*ft_freeparsing(char **split)
+static	void	*ft_freeparsing(char **split)
 {
 	int	i;
 
